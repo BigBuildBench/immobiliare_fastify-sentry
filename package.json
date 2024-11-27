@@ -1,0 +1,106 @@
+{
+  "name": "@immobiliarelabs/fastify-sentry",
+  "version": "8.0.2",
+  "description": "Simple fastify plugin to integrates Sentry error reporting into your services",
+  "main": "index.js",
+  "type": "commonjs",
+  "exports": {
+    ".": {
+      "default": "./index.js",
+      "types": "./index.d.ts"
+    },
+    "./utils": {
+      "default": "./utils.js",
+      "types": "./utils.d.ts"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "nodejs",
+    "javascript",
+    "monitoring",
+    "crash-reporting",
+    "sentry",
+    "error-handling",
+    "fastify",
+    "error-logging",
+    "fastify-plugin",
+    "npm",
+    "errors",
+    "plugin"
+  ],
+  "files": [
+    "lib",
+    "index.js",
+    "utils.js",
+    "index.d.ts",
+    "utils.d.ts"
+  ],
+  "scripts": {
+    "lint": "eslint --fix --ignore-path .gitignore .",
+    "test": "npm run test:ts && tap",
+    "test:ts": "attw --pack && tsd",
+    "bench": "npm run bench:base && npm run bench:plugin",
+    "bench:base": "npx concurrently -k -s first \"node ./benchmarks/base.js\" \"node -e 'setTimeout(() => {}, 1000)' && npx autocannon localhost:4001 && npx autocannon localhost:4001/error\"",
+    "bench:plugin": "npx concurrently -k -s first \"node ./benchmarks/sentry-mock.js\" \"node ./benchmarks/with-sentry.js\" \"node -e 'setTimeout(() => {}, 1000)' && npx autocannon localhost:4002 && npx autocannon localhost:4002/error\"",
+    "toc": "markdown-toc -i README.md",
+    "prepare": "node prepare.js || echo 'Skipping prepare script'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/immobiliare/fastify-sentry.git"
+  },
+  "homepage": "https://github.com/immobiliare/fastify-sentry",
+  "bugs": {
+    "url": "https://github.com/immobiliare/fastify-sentry/issues"
+  },
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.13.4",
+    "@commitlint/cli": "^18.4.3",
+    "@commitlint/config-conventional": "^18.4.3",
+    "@fastify/sensible": "^5.1.0",
+    "@saithodev/semantic-release-backmerge": "^4.0.1",
+    "@semantic-release/changelog": "^6.0.0",
+    "@semantic-release/commit-analyzer": "^11.0.0",
+    "@semantic-release/git": "^10.0.0",
+    "@semantic-release/github": "^9.0.3",
+    "@semantic-release/npm": "^11.0.0",
+    "@semantic-release/release-notes-generator": "^12.0.0",
+    "@tapjs/sinon": "^1.1.17",
+    "@types/node": "^20.1.0",
+    "autocannon": "^7.4.0",
+    "concurrently": "^8.0.1",
+    "cz-conventional-changelog": "^3.2.0",
+    "eslint": "^8.0.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "fastify": "^4.0.3",
+    "husky": "^8.0.0",
+    "is-ci": "^3.0.0",
+    "lint-staged": "^15.2.0",
+    "markdown-toc": "^1.2.0",
+    "nyc": "^15.0.1",
+    "prettier": "^3.0.0",
+    "sentry-testkit": "^5.0.3",
+    "tap": "^19.2.5",
+    "tsd": "^0.30.0",
+    "typescript": "^5.0.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "types": "./index.d.ts",
+  "tsd": {
+    "directory": "test/types"
+  }
+}

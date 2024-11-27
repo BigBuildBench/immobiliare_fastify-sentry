@@ -1,0 +1,9 @@
+# vim: set filetype=yaml :
+files:
+  - test/*.test.js
+allow-incomplete-coverage: true
+node-arg:
+  - --trace-warnings
+timeout: 360
+plugin:
+  - "@tapjs/sinon"
