@@ -91,7 +91,7 @@
     "prettier": "^3.0.0",
     "sentry-testkit": "^5.0.3",
     "tap": "^19.2.5",
-    "tsd": "^0.30.0",
+    "tsd": "^0.31.2",
     "typescript": "^5.0.2"
   },
   "config": {
